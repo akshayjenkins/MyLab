@@ -3,6 +3,7 @@ pipeline{
     agent any
     tools {
         maven 'maven'
+        git 'git'
     }
 
     environment {
@@ -47,7 +48,7 @@ pipeline{
                 echo "Name is ${Name}"
             }
         }
-        
+
         // Stage3 : Deploying
         stage ('Deploy'){
             steps {
