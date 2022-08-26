@@ -16,6 +16,12 @@ pipeline{
     stages {
         // Specify various stage with in stages
 
+        stage('fetch') {
+            steps {
+                sh 'git clone https://github.com/akshayjenkins/MyLab.git'
+            }
+        }
+
         // stage 1. Build
         stage ('Build'){
             steps {
