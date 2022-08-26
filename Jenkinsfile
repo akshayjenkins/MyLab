@@ -39,13 +39,13 @@ pipeline{
 
         // stage4 : Print Environment Variables
 
-        stage ('Print Environment Variables') {
-            steps {
-                echo "ArtifactId is ${ArtifactId}"
-                echo "Version is ${Version}"
-                echo "GroupId is ${GroupId}"
-                echo "Name is ${Name}"
-            }
+        stage ('Print Environment variables'){
+                    steps {
+                        echo "Artifact ID is '${ArtifactId}'"
+                        echo "Version is '${Version}'"
+                        echo "GroupID is '${GroupId}'"
+                        echo "Name is '${Name}'"
+                    }
         }
 
         // Stage3 : Deploying
