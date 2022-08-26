@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     //Directives
     agent any
     tools {
@@ -33,8 +33,9 @@ pipeline{
         // Stage3 : Deploy Artifact to Nexus
         stage ('Deploy to Nexus') {
             steps {
-               script { 
-                def NexusRepo : Version.endswith("SNAPSHOT") ? "VinaysDevopsLab-SNAPSHOT" : "VinaysDevOpsLab-RELEASE"
+                script { 
+
+                def NexusRepo = Version.endsWith("SNAPSHOT") ? ("VinaysDevopsLab-SNAPSHOT") : ("VinaysDevOpsLab-RELEASE")
                 nexusArtifactUploader artifacts: [[artifactId: '${ArtifactId}', 
                 classifier: '', 
                 file: "target/${ArtifactId}-${Version}.war", 
@@ -45,7 +46,7 @@ pipeline{
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: "${NexusRepo}", 
-                version: '${Version}'
+                version: "${Version}"
             }
           } 
         }
