@@ -16,7 +16,7 @@ pipeline{
         // Specify various stage with in stages
 
         // stage 1. Build
-        stage ('Build'){
+         stage ('Build'){
             steps {
                 sh 'mvn clean install package'
             }
@@ -33,17 +33,21 @@ pipeline{
         // Stage3 : Deploy Artifact to Nexus
         stage ('Deploy to Nexus') {
             steps {
+               script { 
+                def NexusRepo : Version.endswith("SNAPSHOT") ? "VinaysDevopsLab-SNAPSHOT" : "VinaysDevOpsLab-RELEASE"
                 nexusArtifactUploader artifacts: [[artifactId: '${ArtifactId}', 
-                classifier: '', file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT.war', 
+                classifier: '', 
+                file: "target/${ArtifactId}-${Version}.war", 
                 type: 'war']], 
                 credentialsId: 'Nexus', 
-                groupId: '${GroupId}', 
+                groupId: "${GroupId}", 
                 nexusUrl: '172.20.10.201:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: 'VinaysDevopsLab-SNAPSHOT', 
+                repository: "${NexusRepo}", 
                 version: '${Version}'
             }
+          } 
         }
 
         // stage4 : Print Environment Variables
