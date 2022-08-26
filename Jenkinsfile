@@ -36,7 +36,7 @@ pipeline {
                 script { 
 
                 def NexusRepo = Version.endsWith("SNAPSHOT") ? ("VinaysDevopsLab-SNAPSHOT") : ("VinaysDevOpsLab-RELEASE")
-                nexusArtifactUploader artifacts: [[artifactId: '${ArtifactId}', 
+                nexusArtifactUploader artifacts: [[artifactId: "${ArtifactId}", 
                 classifier: '', 
                 file: "target/${ArtifactId}-${Version}.war", 
                 type: 'war']], 
