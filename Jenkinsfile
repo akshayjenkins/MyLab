@@ -85,7 +85,7 @@ pipeline {
         } 
 
         // Stage 6 : Deploying
-        stage ('Deploy to tomcat'){
+        stage ('Deploy to Docker'){
             steps {
                 echo ' testing......'
                 sshPublisher(publishers: 
