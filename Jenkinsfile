@@ -84,27 +84,7 @@ pipeline {
             }
         } 
 
-        // Stage 6 : Deploying
-        stage ('Deploy to Docker'){
-            steps {
-                echo ' testing......'
-                sshPublisher(publishers: 
-                [sshPublisherDesc(
-                    configName: 'Ansible_Controller', 
-                    transfers: [
-                        sshTransfer(
-                                cleanRemote:false,
-                                execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy_docker.yml -i /opt/playbooks/hosts',
-                                execTimeout: 120000
-                        )
-                    ], 
-                    usePromotionTimestamp: false, 
-                    useWorkspaceInPromotion: false, 
-                    verbose: false)
-                    ])
-
-            }
-        } 
+       
     }
 
 }
